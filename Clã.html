@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CLÃ — LELZYX</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* FUNDO */
+body {
+    height: 100vh;
+    background: url('foto.jpg') no-repeat center center/cover;
+}
+
+/* OVERLAY */
+.overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0.2));
+}
+
+/* CONTEÚDO */
+.content {
+    position: relative;
+    z-index: 2;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+
+    text-align: center;
+    color: white;
+    padding-bottom: 60px;
+
+    animation: fadeIn 1.5s ease;
+}
+
+/* TEXTOS */
+.artist {
+    font-size: 32px;
+    letter-spacing: 6px;
+}
+
+.album {
+    font-size: 70px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.date {
+    font-size: 16px;
+    letter-spacing: 4px;
+    margin-bottom: 10px;
+}
+
+.presave {
+    font-size: 14px;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+}
+
+/* CONTADOR */
+#countdown {
+    font-size: 18px;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+#countdown span {
+    font-size: 22px;
+}
+
+/* BOTÕES */
+.btn {
+    padding: 15px 35px;
+    border-radius: 30px;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    background: white;
+    color: black;
+    margin-bottom: 15px;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    background: #ddd;
+}
+
+/* TEXTO EXTRA */
+.music {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+/* ANIMAÇÃO */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="overlay"></div>
+
+<div class="content">
+    <div class="artist">LELZYX</div>
+    <div class="album">CLÃ</div>
+
+    <div class="date">31 OUT 2026</div>
+
+    <div class="presave">FAÇA O PRÉ-SAVE</div>
+
+    <div id="countdown">
+        <span id="days">00</span>d :
+        <span id="hours">00</span>h :
+        <span id="minutes">00</span>m :
+        <span id="seconds">00</span>s
+    </div>
+
+    <button class="btn" onclick="window.open('https://google.com')">
+        CLIQUE AQUI
+    </button>
+
+    <div class="music">CLÃ DE VAMPIROS</div>
+
+    <button class="btn" onclick="window.open('https://open.spotify.com/')">
+        OUÇA AGORA
+    </button>
+</div>
+
+<script>
+const releaseDate = new Date("Oct 31, 2026 00:00:00").getTime();
+
+function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = releaseDate - now;
+
+    if (distance <= 0) {
+        document.getElementById("countdown").innerHTML = "JÁ DISPONÍVEL 🔥";
+        return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((distance / (1000 * 60)) % 60);
+    const seconds = Math.floor((distance / 1000) % 60);
+
+    document.getElementById("days").innerText = days;
+    document.getElementById("hours").innerText = hours;
+    document.getElementById("minutes").innerText = minutes;
+    document.getElementById("seconds").innerText = seconds;
+}
+
+setInterval(updateCountdown, 1000);
+updateCountdown();
+</script>
+
+</body>
+</html>
