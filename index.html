@@ -3,178 +3,385 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>CLÃ — LELZYX</title>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
 }
 
-/* FUNDO */
-body {
-    height: 100vh;
-    background: url('foto.jpg') no-repeat center center/cover;
+body{
+height:100vh;
+overflow:hidden;
+background:url("foto.jpg") center center/cover no-repeat;
 }
 
-/* OVERLAY */
-.overlay {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0.2));
+/* FUNDO ESCURO */
+
+.overlay{
+position:fixed;
+width:100%;
+height:100%;
+background:linear-gradient(to top,
+rgba(0,0,0,.85),
+rgba(0,0,0,.35));
 }
 
 /* CONTEÚDO */
-.content {
-    position: relative;
-    z-index: 2;
-    height: 100vh;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
+.content{
 
-    text-align: center;
-    color: white;
-    padding-bottom: 60px;
+position:relative;
+z-index:2;
 
-    animation: fadeIn 1.5s ease;
+height:100vh;
+
+display:flex;
+flex-direction:column;
+justify-content:flex-end;
+align-items:center;
+
+padding-bottom:60px;
+
+text-align:center;
+color:white;
+
+animation:fade 1.5s ease;
+
 }
 
-/* TEXTOS */
-.artist {
-    font-size: 32px;
-    letter-spacing: 6px;
+.artist{
+
+font-size:30px;
+letter-spacing:6px;
+
 }
 
-.album {
-    font-size: 70px;
-    font-weight: bold;
-    margin-bottom: 10px;
+.album{
+
+font-size:72px;
+font-weight:bold;
+
+margin-bottom:10px;
+
 }
 
-.date {
-    font-size: 16px;
-    letter-spacing: 4px;
-    margin-bottom: 10px;
+.date{
+
+letter-spacing:4px;
+margin-bottom:10px;
+
 }
 
-.presave {
-    font-size: 14px;
-    letter-spacing: 3px;
-    margin-bottom: 10px;
+.presave{
+
+font-size:14px;
+letter-spacing:3px;
+margin-bottom:10px;
+
 }
 
-/* CONTADOR */
-#countdown {
-    font-size: 18px;
-    letter-spacing: 2px;
-    margin-bottom: 20px;
-    font-weight: bold;
+#countdown{
+
+font-size:18px;
+margin-bottom:25px;
+font-weight:bold;
+
 }
 
-#countdown span {
-    font-size: 22px;
+.btn{
+
+padding:15px 38px;
+border:none;
+border-radius:40px;
+
+background:white;
+color:black;
+
+cursor:pointer;
+
+margin-bottom:15px;
+
+transition:.3s;
+
 }
 
-/* BOTÕES */
-.btn {
-    padding: 15px 35px;
-    border-radius: 30px;
-    border: none;
-    font-size: 14px;
-    cursor: pointer;
-    background: white;
-    color: black;
-    margin-bottom: 15px;
-    transition: 0.3s;
+.btn:hover{
+
+transform:scale(1.05);
+
 }
 
-.btn:hover {
-    transform: scale(1.05);
-    background: #ddd;
+/* POPUP */
+
+#popup{
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+background:rgba(0,0,0,.94);
+
+display:flex;
+
+justify-content:center;
+align-items:center;
+
+z-index:999;
+
+transition:opacity .7s ease;
+
 }
 
-/* TEXTO EXTRA */
-.music {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    font-size: 14px;
+.popup-box{
+
+width:90%;
+max-width:380px;
+
+background:#090909;
+
+padding:30px;
+
+border-radius:25px;
+
+text-align:center;
+
+color:white;
+
 }
 
-/* ANIMAÇÃO */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.popup-box h2{
+
+margin-bottom:15px;
+
 }
+
+.popup-box p{
+
+margin-bottom:20px;
+
+}
+
+.popup-box input{
+
+width:100%;
+
+padding:14px;
+
+border:none;
+
+border-radius:25px;
+
+text-align:center;
+
+margin-bottom:20px;
+
+font-size:15px;
+
+}
+
+#msg{
+
+margin-top:12px;
+font-size:13px;
+
+color:#ccc;
+
+}
+
+.music{
+
+margin:10px 0;
+
+}
+
+@keyframes fade{
+
+from{
+
+opacity:0;
+transform:translateY(20px);
+
+}
+
+to{
+
+opacity:1;
+transform:translateY(0);
+
+}
+
+}
+
 </style>
 </head>
 
 <body>
 
+<div id="popup">
+
+<div class="popup-box">
+
+<h2>PRÉ-SAVE CLÃ</h2>
+
+<p>Digite seu e-mail para entrar no universo do CLÃ.</p>
+
+<input
+type="email"
+id="email"
+placeholder="Seu e-mail">
+
+<button
+class="btn"
+onclick="presave()">
+
+CONTINUAR
+
+</button>
+
+<div id="msg"></div>
+
+</div>
+
+</div>
+
 <div class="overlay"></div>
 
 <div class="content">
-    <div class="artist">LELZYX</div>
-    <div class="album">CLÃ</div>
 
-    <div class="date">31 OUT 2026</div>
+<div class="artist">LELZYX</div>
 
-    <div class="presave">FAÇA O PRÉ-SAVE</div>
+<div class="album">CLÃ</div>
 
-    <div id="countdown">
-        <span id="days">00</span>d :
-        <span id="hours">00</span>h :
-        <span id="minutes">00</span>m :
-        <span id="seconds">00</span>s
-    </div>
-
-    <button class="btn" onclick="window.open('https://google.com')">
-        O CLÃ ESTÁ CHEGANDO 
-    </button>
-
-    <div class="music">HÍBRIDO</div>
-
-    <button class="btn" onclick="window.open('https://open.spotify.com/')">
-        PRÉ-SAVE DISPONÍVEL 
-    </button>
+<div class="date">
+31 OUT 2026
 </div>
 
+<div class="presave">
+FAÇA O PRÉ-SAVE
+</div>
+
+<div id="countdown"></div>
+
+<button
+class="btn"
+onclick="window.open('https://google.com')">
+
+O CLÃ ESTÁ CHEGANDO
+
+</button>
+
+<div class="music">
+HÍBRIDO
+</div>
+
+<button
+class="btn"
+onclick="window.open('https://open.spotify.com/')">
+
+PRÉ-SAVE DISPONÍVEL
+
+</button>
+
+</div>
 <script>
-  const releaseDate = new Date("Oct 31, 2026 00:00:00").getTime();
 
-function updateCountdown() {
-    const now = new Date().getTime();
-    const distance = releaseDate - now;
+// CONFIGURE AQUI SEU SUPABASE (opcional)
+const supabaseUrl = "https://SEU-PROJETO.supabase.co";
+const supabaseKey = "SUA_CHAVE";
 
-    if (distance <= 0) {
-        document.getElementById("countdown").innerHTML = "JÁ DISPONÍVEL 🔥";
+let supabaseClient = null;
+
+if (
+    supabaseUrl !== "https://SEU-PROJETO.supabase.co" &&
+    supabaseKey !== "SUA_CHAVE"
+){
+    supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+}
+
+// FUNÇÃO DO POPUP
+async function presave(){
+
+    const email = document.getElementById("email").value.trim();
+
+    if(email === ""){
+        document.getElementById("msg").innerText =
+        "Digite um e-mail.";
         return;
     }
 
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((distance / (1000 * 60)) % 60);
-    const seconds = Math.floor((distance / 1000) % 60);
+    localStorage.setItem("lead_email", email);
 
-    document.getElementById("days").innerText = days;
-    document.getElementById("hours").innerText = hours;
-    document.getElementById("minutes").innerText = minutes;
-    document.getElementById("seconds").innerText = seconds;
+    if(supabaseClient){
+        try{
+            await supabaseClient
+            .from("leads")
+            .insert([{email:email}]);
+        }catch(e){}
+    }
+
+    document.getElementById("msg").innerText =
+    "Entrando no CLÃ...";
+
+    setTimeout(()=>{
+
+        document.getElementById("popup").style.opacity="0";
+
+        setTimeout(()=>{
+
+            document.getElementById("popup").style.display="none";
+
+        },700);
+
+    },700);
+
 }
 
-setInterval(updateCountdown, 1000);
+// CONTADOR
+
+const releaseDate = new Date("Oct 31, 2026 00:00:00").getTime();
+
+function updateCountdown(){
+
+const now = new Date().getTime();
+
+const distance = releaseDate - now;
+
+if(distance<=0){
+
+document.getElementById("countdown").innerHTML =
+"🔥 JÁ DISPONÍVEL 🔥";
+
+return;
+
+}
+
+const d=Math.floor(distance/(1000*60*60*24));
+const h=Math.floor((distance/(1000*60*60))%24);
+const m=Math.floor((distance/(1000*60))%60);
+const s=Math.floor((distance/1000)%60);
+
+document.getElementById("countdown").innerHTML=
+
+`${d}d : ${h}h : ${m}m : ${s}s`;
+
+}
+
 updateCountdown();
+
+setInterval(updateCountdown,1000);
+
 </script>
 
 </body>
