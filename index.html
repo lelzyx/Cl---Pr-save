@@ -1,390 +1,983 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>CLÃ — LELZYX</title>
 
+<!-- FONTE GÓTICA / CINEMATOGRÁFICA -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 
 <style>
 
+/* =========================
+   RESET
+========================= */
+
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
+
+
+/* =========================
+   BODY
+========================= */
 
 body{
-height:100vh;
-overflow:hidden;
-background:url("foto.jpg") center center no-repeat;
-background-size:100%;
-background-color:black;
+
+    height:100vh;
+    overflow:hidden;
+
+    background:
+        url("foto.jpg")
+        center center
+        no-repeat;
+
+    background-size:cover;
+
+    background-color:#000;
+
+    font-family:"Cinzel", Georgia, serif;
+
 }
 
-/* FUNDO ESCURO */
+
+/* =========================
+   FUNDO ESCURO
+========================= */
 
 .overlay{
-position:fixed;
-width:0%;
-height:0%;
-background:linear-gradient(to top,
-rgba(0,0,0,.85),
-rgba(0,0,0,.35));
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:1;
+
+    background:
+
+    linear-gradient(
+        to top,
+        rgba(0,0,0,.97) 0%,
+        rgba(0,0,0,.72) 40%,
+        rgba(0,0,0,.30) 75%,
+        rgba(0,0,0,.55) 100%
+    );
+
 }
 
-/* CONTEÚDO */
+
+/* =========================
+   CONTEÚDO
+========================= */
 
 .content{
 
-position:relative;
-z-index:2;
+    position:relative;
 
-height:100vh;
+    z-index:2;
 
-display:flex;
-flex-direction:column;
-justify-content:flex-end;
-align-items:center;
+    height:100vh;
 
-padding-bottom:60px;
+    display:flex;
 
-text-align:center;
-color:white;
+    flex-direction:column;
 
-animation:fade 1.5s ease;
+    justify-content:flex-end;
+
+    align-items:center;
+
+    padding-bottom:45px;
+
+    text-align:center;
+
+    color:white;
+
+    animation:fade 1.5s ease;
 
 }
+
+
+/* =========================
+   LELZYX
+========================= */
 
 .artist{
 
-font-size:30px;
-letter-spacing:6px;
+    font-family:"Cinzel", Georgia, serif;
+
+    font-size:28px;
+
+    font-weight:600;
+
+    letter-spacing:9px;
+
+    margin-bottom:3px;
+
+    color:#fff;
+
+    text-shadow:
+
+        0 2px 4px #000,
+
+        0 0 12px rgba(255,255,255,.25);
 
 }
+
+
+/* =========================
+   CLÃ
+========================= */
 
 .album{
 
-font-size:72px;
-font-weight:bold;
+    font-family:"Cinzel", Georgia, serif;
 
-margin-bottom:10px;
+    font-size:70px;
+
+    font-weight:900;
+
+    letter-spacing:2px;
+
+    line-height:1;
+
+    margin-bottom:12px;
+
+    color:#fff;
+
+    text-shadow:
+
+        2px 3px 0 #000,
+
+        0 0 8px rgba(255,255,255,.4);
 
 }
+
+
+/* =========================
+   FRASE DARK
+========================= */
+
+.frase-dark{
+
+    font-family:"Cinzel", Georgia, serif;
+
+    font-size:15px;
+
+    font-weight:700;
+
+    letter-spacing:3px;
+
+    line-height:1.6;
+
+    max-width:360px;
+
+    margin:0 20px 12px;
+
+    color:#b00000;
+
+    text-transform:uppercase;
+
+    text-shadow:
+
+        0 0 4px rgba(255,0,0,.7),
+
+        0 0 12px rgba(120,0,0,.8),
+
+        0 2px 3px #000;
+
+}
+
+
+/* =========================
+   DIVISOR GÓTICO
+========================= */
+
+.divisor{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    width:80%;
+
+    max-width:380px;
+
+    margin-bottom:18px;
+
+}
+
+
+.divisor::before,
+.divisor::after{
+
+    content:"";
+
+    height:1px;
+
+    flex:1;
+
+    background:
+
+        linear-gradient(
+            to right,
+            transparent,
+            #9b0000
+        );
+
+    box-shadow:0 0 5px #700000;
+
+}
+
+
+.divisor::after{
+
+    background:
+
+        linear-gradient(
+            to left,
+            transparent,
+            #9b0000
+        );
+
+}
+
+
+.divisor span{
+
+    color:#a00000;
+
+    font-size:20px;
+
+    margin:0 14px;
+
+    text-shadow:
+
+        0 0 8px red;
+
+}
+
+
+/* =========================
+   DATA
+========================= */
 
 .date{
 
-letter-spacing:4px;
-margin-bottom:10px;
+    font-family:"Cinzel", Georgia, serif;
+
+    font-size:22px;
+
+    font-weight:500;
+
+    letter-spacing:7px;
+
+    margin-bottom:8px;
+
+    color:#fff;
 
 }
+
+
+/* =========================
+   PRÉ-SAVE
+========================= */
 
 .presave{
 
-font-size:14px;
-letter-spacing:3px;
-margin-bottom:10px;
+    font-family:"Cinzel", Georgia, serif;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    letter-spacing:5px;
+
+    margin-bottom:12px;
 
 }
+
+
+/* =========================
+   CONTADOR
+========================= */
 
 #countdown{
 
-font-size:18px;
-margin-bottom:25px;
-font-weight:bold;
+    font-family:"Cinzel", Georgia, serif;
+
+    font-size:19px;
+
+    font-weight:800;
+
+    letter-spacing:2px;
+
+    margin-bottom:22px;
+
+    color:white;
+
+    text-shadow:
+
+        0 0 8px rgba(255,255,255,.25);
 
 }
+
+
+/* =========================
+   BOTÕES
+========================= */
 
 .btn{
 
-padding:15px 38px;
-border:none;
-border-radius:40px;
+    width:85%;
 
-background:white;
-color:black;
+    max-width:400px;
 
-cursor:pointer;
+    padding:17px 25px;
 
-margin-bottom:15px;
+    border-radius:40px;
 
-transition:.3s;
+    border:1px solid rgba(255,255,255,.75);
+
+    background:
+
+        linear-gradient(
+            135deg,
+            rgba(15,15,15,.98),
+            rgba(0,0,0,.98)
+        );
+
+    color:white;
+
+    font-family:"Cinzel", Georgia, serif;
+
+    font-size:14px;
+
+    font-weight:700;
+
+    letter-spacing:3px;
+
+    cursor:pointer;
+
+    margin-bottom:15px;
+
+    transition:.3s;
+
+    box-shadow:
+
+        inset 0 0 15px rgba(255,255,255,.03),
+
+        0 0 10px rgba(0,0,0,.8);
 
 }
+
+
+/* BOTÃO PRINCIPAL */
+
+.dark-button{
+
+    border-color:#8f0000;
+
+    box-shadow:
+
+        inset 0 0 20px rgba(120,0,0,.25),
+
+        0 0 12px rgba(120,0,0,.35);
+
+}
+
 
 .btn:hover{
 
-transform:scale(1.05);
+    transform:scale(1.04);
 
 }
 
-/* POPUP */
 
-#popup{
-
-position:fixed;
-
-top:0;
-left:0;
-
-width:100%;
-height:100%;
-
-background:rgba(0,0,0,.94);
-
-display:flex;
-
-justify-content:center;
-align-items:center;
-
-z-index:999;
-
-transition:opacity .7s ease;
-
-}
-
-.popup-box{
-
-width:90%;
-max-width:380px;
-
-background:#090909;
-
-padding:30px;
-
-border-radius:25px;
-
-text-align:center;
-
-color:white;
-
-}
-
-.popup-box h2{
-
-margin-bottom:15px;
-
-}
-
-.popup-box p{
-
-margin-bottom:20px;
-
-}
-
-.popup-box input{
-
-width:100%;
-
-padding:14px;
-
-border:none;
-
-border-radius:25px;
-
-text-align:center;
-
-margin-bottom:20px;
-
-font-size:15px;
-
-}
-
-#msg{
-
-margin-top:12px;
-font-size:13px;
-
-color:#ccc;
-
-}
+/* =========================
+   HÍBRIDO
+========================= */
 
 .music{
 
-margin:10px 0;
+    font-family:"Cinzel", Georgia, serif;
+
+    font-size:15px;
+
+    font-weight:500;
+
+    letter-spacing:5px;
+
+    margin:2px 0 12px;
+
+    color:#ddd;
 
 }
+
+
+/* =========================
+   POPUP
+========================= */
+
+#popup{
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+
+        radial-gradient(
+            circle,
+            rgba(50,0,0,.25),
+            rgba(0,0,0,.97)
+        );
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:999;
+
+    transition:opacity .7s ease;
+
+}
+
+
+.popup-box{
+
+    width:90%;
+
+    max-width:390px;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #100000,
+            #050505
+        );
+
+    padding:35px 25px;
+
+    border-radius:20px;
+
+    text-align:center;
+
+    color:white;
+
+    border:1px solid #650000;
+
+    box-shadow:
+
+        0 0 30px rgba(120,0,0,.35),
+
+        inset 0 0 30px rgba(100,0,0,.12);
+
+}
+
+
+.popup-box h2{
+
+    font-family:"Cinzel", Georgia, serif;
+
+    font-size:23px;
+
+    letter-spacing:4px;
+
+    margin-bottom:18px;
+
+}
+
+
+.popup-box p{
+
+    font-family:"Cinzel", Georgia, serif;
+
+    font-size:12px;
+
+    letter-spacing:1px;
+
+    line-height:1.6;
+
+    margin-bottom:22px;
+
+    color:#ccc;
+
+}
+
+
+.popup-box input{
+
+    width:100%;
+
+    padding:15px;
+
+    border:1px solid #555;
+
+    border-radius:30px;
+
+    background:#050505;
+
+    color:white;
+
+    text-align:center;
+
+    margin-bottom:18px;
+
+    font-family:"Cinzel", Georgia, serif;
+
+}
+
+
+#msg{
+
+    margin-top:10px;
+
+    font-family:"Cinzel", Georgia, serif;
+
+    font-size:12px;
+
+    letter-spacing:1px;
+
+    color:#aaa;
+
+}
+
+
+/* =========================
+   ANIMAÇÃO
+========================= */
 
 @keyframes fade{
 
-from{
+    from{
 
-opacity:0;
-transform:translateY(20px);
+        opacity:0;
+
+        transform:translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
 
 }
 
-to{
 
-opacity:1;
-transform:translateY(0);
+/* =========================
+   CELULAR
+========================= */
+
+@media(max-width:500px){
+
+    .artist{
+
+        font-size:22px;
+
+        letter-spacing:7px;
+
+    }
+
+    .album{
+
+        font-size:60px;
+
+    }
+
+    .frase-dark{
+
+        font-size:13px;
+
+        letter-spacing:2px;
+
+    }
+
+    .date{
+
+        font-size:19px;
+
+        letter-spacing:5px;
+
+    }
+
+    .presave{
+
+        font-size:13px;
+
+        letter-spacing:4px;
+
+    }
+
+    #countdown{
+
+        font-size:16px;
+
+    }
 
 }
+
+
+/* =========================
+   ESCONDER POPUP
+========================= */
+
+.hidden{
+
+    display:none !important;
 
 }
 
 </style>
+
 </head>
+
 
 <body>
 
+
+<!-- =========================
+     POPUP PRÉ-SAVE
+========================= -->
+
 <div id="popup">
 
-<div class="popup-box">
+    <div class="popup-box">
 
-<h2>PRÉ-SAVE CLÃ</h2>
+        <h2>PRÉ-SAVE CLÃ</h2>
 
-<p>Digite seu e-mail para entrar no universo do CLÃ.</p>
+        <p>
+            DIGITE SEU E-MAIL PARA ENTRAR
+            NO UNIVERSO DO CLÃ.
+        </p>
 
-<input
-type="email"
-id="email"
-placeholder="Seu e-mail">
+        <input
+            type="email"
+            id="email"
+            placeholder="SEU E-MAIL">
 
-<button
-class="btn"
-onclick="presave()">
+        <button
+            class="btn dark-button"
+            onclick="presave()">
 
-CONTINUAR
+            CONTINUAR
 
-</button>
+        </button>
 
-<div id="msg"></div>
+        <div id="msg"></div>
+
+    </div>
 
 </div>
 
-</div>
+
+<!-- FUNDO -->
 
 <div class="overlay"></div>
 
+
+<!-- =========================
+     CONTEÚDO PRINCIPAL
+========================= -->
+
 <div class="content">
 
-<div class="artist">LELZYX</div>
 
-<div class="album">CLÃ</div>
+    <div class="artist">
 
-<div class="date">
-31 OUT 2026
+        LELZYX
+
+    </div>
+
+
+    <div class="album">
+
+        CLÃ
+
+    </div>
+
+
+    <!-- FRASE -->
+
+    <div class="frase-dark">
+
+        O MAL NUNCA FOI UM ERRO,<br>
+        SEMPRE FOI O PLANO.
+
+    </div>
+
+
+    <!-- DIVISOR -->
+
+    <div class="divisor">
+
+        <span>✦</span>
+
+    </div>
+
+
+    <div class="date">
+
+        31 OUT 2026
+
+    </div>
+
+
+    <div class="presave">
+
+        FAÇA O PRÉ-SAVE
+
+    </div>
+
+
+    <div id="countdown"></div>
+
+
+    <!-- BOTÃO FRASE -->
+
+    <button
+        class="btn dark-button"
+        onclick="window.open('https://ditto.fm/hibrido-lelzyx','_blank')">
+
+        O MAL ESTÁ CHEGANDO
+
+    </button>
+
+
+    <div class="music">
+
+        HÍBRIDO
+
+    </div>
+
+
+    <!-- PRÉ-SAVE -->
+
+    <button
+        class="btn"
+        onclick="window.open('https://ditto.fm/hibrido-lelzyx','_blank')">
+
+        PRÉ-SAVE DISPONÍVEL
+
+    </button>
+
+
 </div>
 
-<div class="presave">
-FAÇA O PRÉ-SAVE
-</div>
 
-<div id="countdown"></div>
-
-<button
-class="btn"
-onclick="window.open('https://google.com')">
-
-O CLÃ ESTÁ CHEGANDO
-
-</button>
-
-<div class="music">
-HÍBRIDO
-</div>
-
-<button
-class="btn"
-onclick="window.open('https://ditto.fm/hibrido-lelzyx')">
-
-PRÉ-SAVE DISPONÍVEL
-
-</button>
-
-</div>
 <script>
 
-// CONFIGURE AQUI SEU SUPABASE (opcional)
-const supabaseUrl = "https://SEU-PROJETO.supabase.co";
-const supabaseKey = "SUA_CHAVE";
+
+/* =========================
+   SUPABASE
+========================= */
+
+const supabaseUrl =
+"https://SEU-PROJETO.supabase.co";
+
+const supabaseKey =
+"SUA_CHAVE";
+
 
 let supabaseClient = null;
 
-if (
-    supabaseUrl !== "https://SEU-PROJETO.supabase.co" &&
-    supabaseKey !== "SUA_CHAVE"
+
+if(
+
+    supabaseUrl !==
+    "https://SEU-PROJETO.supabase.co"
+
+    &&
+
+    supabaseKey !==
+    "SUA_CHAVE"
+
 ){
-    supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+
+    supabaseClient =
+        supabase.createClient(
+            supabaseUrl,
+            supabaseKey
+        );
+
 }
 
-// FUNÇÃO DO POPUP
+
+/* =========================
+   PRÉ-SAVE
+========================= */
+
 async function presave(){
 
-    const email = document.getElementById("email").value.trim();
+    const email =
+        document
+        .getElementById("email")
+        .value
+        .trim();
+
 
     if(email === ""){
-        document.getElementById("msg").innerText =
-        "Digite um e-mail.";
+
+        document
+        .getElementById("msg")
+        .innerText =
+        "DIGITE UM E-MAIL.";
+
         return;
+
     }
 
-    localStorage.setItem("lead_email", email);
+
+    localStorage.setItem(
+        "lead_email",
+        email
+    );
+
 
     if(supabaseClient){
+
         try{
+
             await supabaseClient
             .from("leads")
-            .insert([{email:email}]);
+            .insert([
+                {
+                    email:email
+                }
+            ]);
+
         }catch(e){}
+
     }
 
-    document.getElementById("msg").innerText =
-    "Entrando no CLÃ...";
+
+    document
+    .getElementById("msg")
+    .innerText =
+    "ENTRANDO NO CLÃ...";
+
 
     setTimeout(()=>{
 
-        document.getElementById("popup").style.opacity="0";
+        document
+        .getElementById("popup")
+        .style.opacity="0";
+
 
         setTimeout(()=>{
 
-            document.getElementById("popup").style.display="none";
+            document
+            .getElementById("popup")
+            .classList.add("hidden");
+
 
         },700);
+
 
     },700);
 
 }
 
-// CONTADOR
 
-const releaseDate = new Date("Oct 31, 2026 00:00:00").getTime();
+/* =========================
+   CONTADOR
+========================= */
+
+const releaseDate =
+    new Date(
+        "Oct 31, 2026 00:00:00"
+    ).getTime();
+
 
 function updateCountdown(){
 
-const now = new Date().getTime();
+    const now =
+        new Date().getTime();
 
-const distance = releaseDate - now;
 
-if(distance<=0){
+    const distance =
+        releaseDate - now;
 
-document.getElementById("countdown").innerHTML =
-"🔥 JÁ DISPONÍVEL 🔥";
 
-return;
+    if(distance <= 0){
+
+        document
+        .getElementById("countdown")
+        .innerHTML =
+        "✦ JÁ DISPONÍVEL ✦";
+
+        return;
+
+    }
+
+
+    const d =
+        Math.floor(
+            distance /
+            (1000*60*60*24)
+        );
+
+
+    const h =
+        Math.floor(
+            (distance /
+            (1000*60*60)) % 24
+        );
+
+
+    const m =
+        Math.floor(
+            (distance /
+            (1000*60)) % 60
+        );
+
+
+    const s =
+        Math.floor(
+            (distance /
+            1000) % 60
+        );
+
+
+    document
+    .getElementById("countdown")
+    .innerHTML =
+
+    `${d}d : ${h}h : ${m}m : ${s}s`;
 
 }
 
-const d=Math.floor(distance/(1000*60*60*24));
-const h=Math.floor((distance/(1000*60*60))%24);
-const m=Math.floor((distance/(1000*60))%60);
-const s=Math.floor((distance/1000)%60);
-
-document.getElementById("countdown").innerHTML=
-
-`${d}d : ${h}h : ${m}m : ${s}s`;
-
-}
 
 updateCountdown();
 
-setInterval(updateCountdown,1000);
+
+setInterval(
+    updateCountdown,
+    1000
+);
+
 
 </script>
 
+
 </body>
+
 </html>
