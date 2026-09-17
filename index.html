@@ -646,7 +646,39 @@ body{
 
 }
 
-</style>
+/* ANIMAÇÃO CINEMATOGRÁFICA */
+@keyframes clanEnter{
+  0%{transform:scale(1);opacity:1;filter:brightness(1);}
+  25%{transform:scale(1.03);filter:brightness(1.4);}
+  50%{transform:scale(.97);}
+  100%{transform:scale(1.08);opacity:0;filter:brightness(2);}
+}
+
+.entering{
+  animation:clanEnter .9s ease forwards;
+  box-shadow:
+    0 0 70px rgba(180,0,0,.9),
+    inset 0 0 30px rgba(255,0,0,.25);
+}
+
+@keyframes bloodFlash{
+  0%{opacity:0;}
+  50%{opacity:1;}
+  100%{opacity:0;}
+}
+
+.flash{
+  position:fixed;
+  inset:0;
+  background:radial-gradient(circle,rgba(255,0,0,.18),transparent 70%);
+  pointer-events:none;
+  z-index:998;
+  opacity:0;
+}
+
+.flash.active{
+  animation:bloodFlash .8s ease;
+}</style>
 
 </head>
 
