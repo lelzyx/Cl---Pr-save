@@ -897,30 +897,18 @@ async function presave(){
     }
 
 
-    document
-    .getElementById("msg")
-    .innerText =
-    "ENTRANDO NO CLÃ...";
+    document.getElementById("msg").innerText = "ENTRANDO NO CLÃ...";
 
+document.querySelector(".album").classList.add("entering");
+document.getElementById("flash").classList.add("active");
 
-    setTimeout(()=>{
+setTimeout(() => {
+  document.getElementById("popup").style.opacity = "0";
 
-        document
-        .getElementById("popup")
-        .style.opacity="0";
-
-
-        setTimeout(()=>{
-
-            document
-            .getElementById("popup")
-            .classList.add("hidden");
-
-
-        },700);
-
-
-    },700);
+  setTimeout(() => {
+    document.getElementById("popup").classList.add("hidden");
+  }, 700);
+}, 900);
 
 }
 
@@ -1005,6 +993,7 @@ setInterval(
 
 </script>
 
+<div class="flash" id="flash"></div>
 
 </body>
 
